@@ -127,6 +127,7 @@ namespace Complete
 
             // Find and set the required size of the camera.
             m_Camera.orthographicSize = FindRequiredSize ();
+
         }
     }
 }
