@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 namespace Complete
 {
-    public class TankShooting : MonoBehaviour
+	public class TankShooting : NetworkBehaviour
     {
         public int m_PlayerNumber = 1;              // Used to identify the different players.
         public Rigidbody m_Shell;                   // Prefab of the shell.
@@ -51,7 +52,7 @@ namespace Complete
             {
                 // ... use the max force and launch the shell.
                 m_CurrentLaunchForce = m_MaxLaunchForce;
-                Fire ();
+                CmdFire ();
             }
             // Otherwise, if the fire button has just started being pressed...
             else if (Input.GetButtonDown (m_FireButton))
@@ -76,12 +77,12 @@ namespace Complete
             else if (Input.GetButtonUp (m_FireButton) && !m_Fired)
             {
                 // ... launch the shell.
-                Fire ();
+                CmdFire ();
             }
         }
 
-
-        private void Fire ()
+		[Command]
+        private void CmdFire ()
         {
             // Set the fired flag so only Fire is only called once.
             m_Fired = true;
